@@ -31,9 +31,6 @@ include 'db_conn.php';
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="index.php">Home</a>
                         </li>
-                        <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="about.php">About</a>
-                        </li>
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item">
