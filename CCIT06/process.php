@@ -2,47 +2,6 @@
 session_start();
 include('db_conn.php');
 
-session_start();
-$user_id = $_SESSION['user_id'];
-
-if(isset($_POST['update_users_btn'])) {
-    $users_id = $_POST['users_id'];
-    $u_fname = $_POST['u_fname'];
-    $u_lname = $_POST['u_lname'];
-    $u_email = $_POST['u_email'];
-    $u_pass = $_POST['u_pass'];
-
-    // Hash the password
-    $hashed_password = password_hash($u_pass, PASSWORD_DEFAULT);
-
-    try {
-        $query = "UPDATE users SET u_fname=:u_fname, u_lname=:u_lname, u_email=:u_email, u_pass=:u_pass WHERE u_id=:users_id LIMIT 1";
-        $statement = $conn->prepare($query);
-        $data = [
-            ':u_fname' => $u_fname,
-            ':u_lname' => $u_lname,
-            ':u_email' => $u_email,
-            ':u_pass' => $hashed_password, // Use the hashed password here
-            ':users_id' => $users_id,
-        ];
-
-        $query_execute = $statement->execute($data);
-
-        if($query_execute) {
-            $_SESSION['message'] = "Updated Users Successfully";
-            header('location: edituser.php');
-            exit(0);
-        } else {
-            $_SESSION['message'] = "Not Updated";
-            header('location: edituser.php');
-            exit(0);
-        }
-
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-}
-
 if (isset($_POST['registerUser'])) {
   $fname = $_POST['fname'];
   $lname = $_POST['lname'];
